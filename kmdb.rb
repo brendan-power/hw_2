@@ -294,20 +294,20 @@ role_15.save
 
 
 # Data sanity checks
-puts "There are #{Studio.all.count} studios"
-puts WarnerBros.inspect
-puts movie_1.inspect
-puts movie_2.inspect
-puts movie_3.inspect
+# puts "There are #{Studio.all.count} studios"
+# puts WarnerBros.inspect
+# puts movie_1.inspect
+# puts movie_2.inspect
+# puts movie_3.inspect
 
-puts Actor.inspect
-puts actor_1.inspect
-puts actor_9.inspect
-puts role_1.inspect
-puts role_1.inspect
-puts "---"
-puts "---"
-puts "---"
+# puts Actor.inspect
+# puts actor_1.inspect
+# puts actor_9.inspect
+# puts role_1.inspect
+# puts role_1.inspect
+# puts "---"
+# puts "---"
+# puts "---"
 
 
 # caine_roles = Role.where({
@@ -320,15 +320,48 @@ puts "---"
 # end
 
 
-bruce_roles = Role.where({"character_name" => "Bruce Wayne"})
-puts bruce_roles.inspect 
+# Prints a header for the movies output
+puts " "
+puts "Movies"
+puts "======"
+puts ""
 
-for role in bruce_roles
-    name = role["character_name"]
-    puts "#{name}""
+
+
+
+
+moviedata = Movie.all
+for movie in moviedata
+    movie_title = movie["title"]
+    movie_year = movie["year_released"]
+    movie_rating = movie["rating"]
+    movie_studio = movie["studio_id"]
+    
+    puts "#{movie_title}    #{movie_year}    #{movie_rating}    #{movie_studio}"
 end
 
 
+# Prints a header for the cast output
+puts ""
+puts "Top Cast"
+puts "========"
+puts ""
+
+roledata2 = Role.all
+moviedata2 = Movie.all
+actordata2 = Actor.all
+
+for role in roledata2
+    character = role["character_name"]
+    actor = actordata2.find { |actor| actor["id"] == role["actor_id"]}
+    actor_name = actor["name"]
+    movie = moviedata2.find { |movie| movie["id"] == role["movie_id"] }
+    movie_name = movie["title"]
+
+
+    puts "#{movie_name}    #{actor_name}     #{character}"
+
+end
 
 
 
